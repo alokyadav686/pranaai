@@ -59,7 +59,7 @@ class _Splashscreen1State extends State<Splashscreen1> {
   void _navigateToLogin() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const Home()),
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
     );
   }
 
