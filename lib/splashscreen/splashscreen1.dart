@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:pranaai/loginscreen/login.dart';
+import 'package:pranaai/mainui/home.dart';
 
 class Splashscreen1 extends StatefulWidget {
   const Splashscreen1({super.key});
@@ -11,8 +12,8 @@ class Splashscreen1 extends StatefulWidget {
 }
 
 class _Splashscreen1State extends State<Splashscreen1> {
-  int _currentStep = 0;
-  late Timer _timer;
+  int currentStep = 0;
+  late Timer timer;
 
   final heading = [
     'Personalized Health Insights',
@@ -36,20 +37,20 @@ class _Splashscreen1State extends State<Splashscreen1> {
   @override
   void initState() {
     super.initState();
-    _startProgress();
+    startProgress();
   }
 
-  void _startProgress() {
-    _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
-      if (_currentStep < heading.length - 1) {
+  void startProgress() {
+    timer = Timer.periodic(const Duration(seconds: 2), (timer) {
+      if (currentStep < heading.length - 1) {
         setState(() {
-          _currentStep++;
+          currentStep++;
         });
       } else {
         setState(() {
-          _currentStep++;
+          currentStep++;
         });
-        _timer.cancel();
+        timer.cancel();
         _navigateToLogin();
       }
     });
@@ -58,13 +59,13 @@ class _Splashscreen1State extends State<Splashscreen1> {
   void _navigateToLogin() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const Login()),
+      MaterialPageRoute(builder: (context) => const Home()),
     );
   }
 
   @override
   void dispose() {
-    _timer.cancel();
+    timer.cancel();
     super.dispose();
   }
 
@@ -100,7 +101,7 @@ class _Splashscreen1State extends State<Splashscreen1> {
               SizedBox(height: 150),
               SizedBox(
                   width: widthh / 1.5,
-                  child: Image.asset(images[_currentStep % images.length])),
+                  child: Image.asset(images[currentStep % images.length])),
               SizedBox(height: 100),
               buildTextForStep(0),
               buildTextForStep(1),
@@ -114,7 +115,7 @@ class _Splashscreen1State extends State<Splashscreen1> {
   }
 
   Widget buildProgressBar(int step, double width) {
-    double progressValue = (_currentStep >= step) ? 1.0 : 0.0;
+    double progressValue = (currentStep >= step) ? 1.0 : 0.0;
 
     return Container(
       width: width / 5,
@@ -141,7 +142,7 @@ class _Splashscreen1State extends State<Splashscreen1> {
   }
 
   Widget buildTextForStep(int step) {
-    bool isVisible = _currentStep == step;
+    bool isVisible = currentStep == step;
 
     return Visibility(
       visible: isVisible,
