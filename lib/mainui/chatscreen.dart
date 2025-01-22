@@ -38,7 +38,6 @@ class _ChatScreenState extends State<ChatScreen> {
       });
       _messageController.clear();
 
-      // Check if there's a predefined response
       String response = _getPredefinedResponse(userMessage);
       if (response.isNotEmpty) {
         Future.delayed(const Duration(milliseconds: 500), () {
@@ -63,6 +62,9 @@ class _ChatScreenState extends State<ChatScreen> {
     if (userMessage.toLowerCase() == "hi" || userMessage.toLowerCase() == "hello") {
       return "Hello! How can I assist you today?";
     }
+    if (userMessage.toLowerCase().contains("hlw")) {
+      return "Hello! How can I assist you today?";
+    }
     if (userMessage.toLowerCase() == "how are you?") {
       return "I'm doing great, thank you for asking!";
     }
@@ -71,7 +73,7 @@ class _ChatScreenState extends State<ChatScreen> {
     }
     if (userMessage.toLowerCase().contains("i love you")) {
       return "I Love You too...";
-    }
+    } 
     return "I am sorry, I dont know about this now"; 
   }
 
